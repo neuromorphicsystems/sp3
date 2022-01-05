@@ -1,5 +1,6 @@
 import argparse
 import operator
+import re
 from . import provider as provider
 from . import satellite as satellite
 
@@ -22,13 +23,16 @@ if __name__ == "__main__":
         sp3_id_to_providers_count = {
             sp3_id: 0 for sp3_id in satellite.sp3_to_satellite.keys()
         }
-        extra: set[bytes] = set()
+        extra: list[tuple[provider.Provider, re.Pattern]] = []
         for candidate_provider in provider.providers:
-            for sp3_id in candidate_provider.sp3_ids:
-                if sp3_id in sp3_id_to_providers_count:
-                    sp3_id_to_providers_count[sp3_id] += 1
-                else:
-                    extra.add(sp3_id)
+            for sp3_pattern in candidate_provider.sp3_patterns:
+                matched_at_least_once = False
+                for sp3_id in satellite.sp3_to_satellite.keys():
+                    if sp3_pattern.match(sp3_id) is not None:
+                        matched_at_least_once = True
+                        sp3_id_to_providers_count[sp3_id] += 1
+                if not matched_at_least_once:
+                    extra.append((candidate_provider, sp3_pattern))
         providers_count_to_satellites: dict[int, list[satellite.Satellite]] = {}
         for sp3_id, providers_count in sp3_id_to_providers_count.items():
             if not providers_count in providers_count_to_satellites:
@@ -38,12 +42,15 @@ if __name__ == "__main__":
             )
         for satellites in providers_count_to_satellites.values():
             satellites.sort(key=operator.attrgetter("sp3"))
-        print(
-            "provided but not listed in satellites.json: {}\n".format(
-                ", ".join(sp3_id.decode() for sp3_id in sorted(extra))
-            )
-        )
-        for providers_count, satellites in providers_count_to_satellites.items():
+        if len(extra) > 0:
+            print("patterns that did not match any satellites:")
+            for candidate_provider, sp3_pattern in extra:
+                print(
+                    f"    {sp3_pattern.pattern} (provider {candidate_provider.name_template})"
+                )
+        for providers_count, satellites in sorted(
+            providers_count_to_satellites.items()
+        ):
             if providers_count == 0:
                 print("no providers")
             elif providers_count == 1:

@@ -20,6 +20,7 @@ from .parse import (
     Satellite as Satellite,
     Product as Product,
 )
+from .provider import cddis as cddis
 
 
 @dataclasses.dataclass(init=False)
@@ -38,13 +39,6 @@ class Sp3Id(Id):
 
 
 @dataclasses.dataclass(init=False)
-class IlrsId(Id):
-    def __init__(self, value: typing.Union[str, bytes]):
-        self.value = value.encode() if isinstance(value, str) else value
-        assert satellite.ilrs_pattern.match(self.value) is not None
-
-
-@dataclasses.dataclass(init=False)
 class NoradId(Id):
     def __init__(self, value: typing.Union[str, bytes]):
         self.value = value.encode() if isinstance(value, str) else value
@@ -60,12 +54,12 @@ def interpolate_records(
     polynomial_degree: int = 10,
 ):
     assert begin < end
-    if (
-        len(records) < window * 2 + 1
-        or begin < records[window].time
-        or end >= records[-window].time
-    ):
-        raise Exception("unsufficient number of records")
+    if len(records) < window * 2 + 1:
+        raise Exception("insufficient number of records")
+    if begin < records[window].time:
+        raise Exception("begin is too close to the first record to interpolate")
+    if end >= records[-window].time:
+        raise Exception("end is too close to the last record to interpolate")
     time_and_position = numpy.array(
         [
             [
@@ -155,8 +149,6 @@ def interpolate(
     sp3_id: bytes
     if isinstance(id, Sp3Id):
         sp3_id = id.value
-    elif isinstance(id, IlrsId):
-        sp3_id = satellite.ilrs_to_satellite[id.value].sp3
     elif isinstance(id, NoradId):
         sp3_id = satellite.norad_to_satellite[id.value].sp3
     else:
@@ -196,7 +188,7 @@ def interpolate(
                             records.append(record)
                 if len(records) > window:
                     begin_covered = begin >= records[window].time
-                    end_covered = records[-window].time
+                    end_covered = end < records[-window].time
                     if begin_covered:
                         if end_covered:
                             provider_found = True
@@ -226,15 +218,3 @@ def interpolate(
         window,
         polynomial_degree,
     )
-
-
-# @DEV {
-logging.basicConfig(level=logging.INFO)
-interpolate(
-    Sp3Id("E24"),
-    begin=datetime.datetime.fromisoformat("2021-12-14T00:00:00.000+00:00"),
-    end=datetime.datetime.fromisoformat("2021-12-14T06:00:00.000+00:00"),
-    samples_count=700,
-    download_directory="downloads",
-)
-# }
