@@ -1,786 +1,151 @@
 [
-    {
-        "group": "General",
-        "name": "CryoSat-2",
-        "sp3": "L12",
-        "ilrs": "1001301",
-        "norad": "36508"
-    },
-    {
-        "group": "General",
-        "name": "TerraSAR-X",
-        "sp3": "L13",
-        "ilrs": "702601",
-        "norad": "31698",
-        "aliases": [
-            {
-                "group": "General",
-                "name": "TanDEM-X",
-                "sp3": "L20"
-            }
-        ]
-    },
-    {
-        "group": "General",
-        "name": "Metop-2",
-        "sp3": "L14",
-        "ilrs": "604401",
-        "norad": "29499"
-    },
-    {
-        "group": "General",
-        "name": "Beacon-C",
-        "sp3": "L16",
-        "ilrs": "6503201",
-        "norad": "1328"
-    },
-    {
-        "group": "General",
-        "name": "IRS-P5 (CARTOSAT-1)",
-        "sp3": "L19",
-        "ilrs": "501701",
-        "norad": "28649"
-    },
-    {
-        "group": "General",
-        "name": "COSMIC-1 (FM-1)",
-        "sp3": "L21",
-        "ilrs": "601101",
-        "norad": "29047"
-    },
-    {
-        "group": "General",
-        "name": "COSMIC-1 (FM-2)",
-        "sp3": "L22",
-        "ilrs": "601102",
-        "norad": "29048"
-    },
-    {
-        "group": "General",
-        "name": "COSMIC-1 (FM-3)",
-        "sp3": "L23",
-        "ilrs": "601103",
-        "norad": "29049"
-    },
-    {
-        "group": "General",
-        "name": "COSMIC-1 (FM-4)",
-        "sp3": "L24",
-        "ilrs": "601104",
-        "norad": "29050"
-    },
-    {
-        "group": "General",
-        "name": "COSMIC-1 (FM-5)",
-        "sp3": "L25",
-        "ilrs": "601105",
-        "norad": "29051"
-    },
-    {
-        "group": "General",
-        "name": "COSMIC-1 (FM-6)",
-        "sp3": "L26",
-        "ilrs": "601106",
-        "norad": "29052"
-    },
-    {
-        "group": "General",
-        "name": "Jason-2",
-        "sp3": "L27",
-        "ilrs": "803201",
-        "norad": "33105"
-    },
-    {
-        "group": "General",
-        "name": "Jason-3",
-        "sp3": "L39",
-        "ilrs": "1600201",
-        "norad": "41240"
-    },
-    {
-        "group": "General",
-        "name": "Metop-B",
-        "sp3": "L41",
-        "ilrs": "1204901",
-        "norad": "38771"
-    },
-    {
-        "group": "General",
-        "name": "Metop-C",
-        "sp3": "L42",
-        "ilrs": "1808701",
-        "norad": "43689"
-    },
-    {
-        "group": "General",
-        "name": "HY-2A",
-        "sp3": "L45",
-        "ilrs": "1104301",
-        "norad": "37781"
-    },
-    {
-        "group": "General",
-        "name": "SARAL",
-        "sp3": "L46",
-        "ilrs": "1300901",
-        "norad": "39086"
-    },
-    {
-        "group": "General",
-        "name": "Swarm-A",
-        "sp3": "L47",
-        "ilrs": "1306702",
-        "norad": "39452"
-    },
-    {
-        "group": "General",
-        "name": "Swarm-B",
-        "sp3": "L48",
-        "ilrs": "1306701",
-        "norad": "39451"
-    },
-    {
-        "group": "General",
-        "name": "Swarm-C",
-        "sp3": "L49",
-        "ilrs": "1306703",
-        "norad": "39453"
-    },
-    {
-        "group": "General",
-        "name": "Ajisai",
-        "sp3": "L50",
-        "ilrs": "8606101",
-        "norad": "16908"
-    },
-    {
-        "group": "General",
-        "name": "LAGEOS-1",
-        "sp3": "L51",
-        "ilrs": "7603901",
-        "norad": "8820"
-    },
-    {
-        "group": "General",
-        "name": "LAGEOS-2",
-        "sp3": "L52",
-        "ilrs": "9207002",
-        "norad": "22195"
-    },
-    {
-        "group": "General",
-        "name": "Etalon-1",
-        "sp3": "L53",
-        "ilrs": "8900103",
-        "norad": "19751"
-    },
-    {
-        "group": "General",
-        "name": "Etalon-2",
-        "sp3": "L54",
-        "ilrs": "8903903",
-        "norad": "20026"
-    },
-    {
-        "group": "General",
-        "name": "Starlette",
-        "sp3": "L55",
-        "ilrs": "7501001",
-        "norad": "7646"
-    },
-    {
-        "group": "General",
-        "name": "Stella",
-        "sp3": "L56",
-        "ilrs": "9306102",
-        "norad": "22824"
-    },
-    {
-        "group": "General",
-        "name": "Larets",
-        "sp3": "L59",
-        "ilrs": "304206",
-        "norad": "27944"
-    },
-    {
-        "group": "General",
-        "name": "LARES",
-        "sp3": "L60",
-        "ilrs": "1200601",
-        "norad": "38077"
-    },
-    {
-        "group": "General",
-        "name": "CASSIOPE",
-        "sp3": "L63",
-        "ilrs": "1305501",
-        "norad": "39265"
-    },
-    {
-        "group": "General",
-        "name": "GRACE-FO -A",
-        "sp3": "L64",
-        "ilrs": "1804701",
-        "norad": "43476"
-    },
-    {
-        "group": "General",
-        "name": "GRACE-FO -B",
-        "sp3": "L65",
-        "ilrs": "1804702",
-        "norad": "43477"
-    },
-    {
-        "group": "General",
-        "name": "PAZ",
-        "sp3": "L66",
-        "ilrs": "1802001",
-        "norad": "43215"
-    },
-    {
-        "group": "General",
-        "name": "HY-2B",
-        "sp3": "L68",
-        "ilrs": "1808101",
-        "norad": "43655"
-    },
-    {
-        "group": "General",
-        "name": "HY-2C",
-        "sp3": "L69",
-        "ilrs": "2006601",
-        "norad": "46469"
-    },
-    {
-        "group": "General",
-        "name": "Sentinel-1A",
-        "sp3": "L70",
-        "ilrs": "1401601",
-        "norad": "39634"
-    },
-    {
-        "group": "General",
-        "name": "Sentinel-1B",
-        "sp3": "L71",
-        "ilrs": "1602501",
-        "norad": "41456"
-    },
-    {
-        "group": "General",
-        "name": "Sentinel-2A",
-        "sp3": "L72",
-        "ilrs": "1502801",
-        "norad": "40697"
-    },
-    {
-        "group": "General",
-        "name": "Sentinel-2B",
-        "sp3": "L73",
-        "ilrs": "1701301",
-        "norad": "42063"
-    },
-    {
-        "group": "General",
-        "name": "Sentinel-3A",
-        "sp3": "L74",
-        "ilrs": "1601101",
-        "norad": "41335"
-    },
-    {
-        "group": "General",
-        "name": "Sentinel-3B",
-        "sp3": "L75",
-        "ilrs": "1803901",
-        "norad": "43437"
-    },
-    {
-        "group": "General",
-        "name": "Sentinel-6A / Jason-CS A",
-        "sp3": "L76",
-        "ilrs": "2008601",
-        "norad": "46984"
-    },
-    {
-        "group": "General",
-        "name": "HY-2D",
-        "sp3": "L78",
-        "ilrs": "2104301",
-        "norad": "48621"
-    },
-    {
-        "group": "Atmospheric & Remote Sensing",
-        "name": "COSMIC-2-1",
-        "sp3": "A05",
-        "ilrs": "1903611",
-        "norad": "44349"
-    },
-    {
-        "group": "Atmospheric & Remote Sensing",
-        "name": "COSMIC-2-2",
-        "sp3": "A06",
-        "ilrs": "1903613",
-        "norad": "44351"
-    },
-    {
-        "group": "Atmospheric & Remote Sensing",
-        "name": "COSMIC-2-3",
-        "sp3": "A07",
-        "ilrs": "1903605",
-        "norad": "44343"
-    },
-    {
-        "group": "Atmospheric & Remote Sensing",
-        "name": "COSMIC-2-4",
-        "sp3": "A08",
-        "ilrs": "1903612",
-        "norad": "44350"
-    },
-    {
-        "group": "Atmospheric & Remote Sensing",
-        "name": "COSMIC-2-5",
-        "sp3": "A09",
-        "ilrs": "1903620",
-        "norad": "44358"
-    },
-    {
-        "group": "Atmospheric & Remote Sensing",
-        "name": "COSMIC-2-6",
-        "sp3": "A10",
-        "ilrs": "1903615",
-        "norad": "44353"
-    },
-    {
-        "group": "GPS group",
-        "name": "GPS-35",
-        "sp3": "G05",
-        "ilrs": "9305401",
-        "norad": "22779"
-    },
-    {
-        "group": "GPS group",
-        "name": "GPS-36",
-        "sp3": "G06",
-        "ilrs": "9401601",
-        "norad": "23027"
-    },
-    {
-        "group": "GLONASS",
-        "name": "GLONASS-100",
-        "sp3": "R23",
-        "ilrs": "505001",
-        "norad": "28915"
-    },
-    {
-        "group": "GLONASS",
-        "name": "GLONASS-102",
-        "sp3": "R15",
-        "ilrs": "606201",
-        "norad": "29670"
-    },
-    {
-        "group": "GLONASS",
-        "name": "GLONASS-109",
-        "sp3": "R11",
-        "ilrs": "706503",
-        "norad": "32395"
-    },
-    {
-        "group": "GLONASS",
-        "name": "GLONASS-115",
-        "sp3": "R08",
-        "ilrs": "806702",
-        "norad": "33467"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-101",
-        "sp3": "E11",
-        "ilrs": "1106001",
-        "norad": "37846"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-102",
-        "sp3": "E12",
-        "ilrs": "1106002",
-        "norad": "37847"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-103",
-        "sp3": "E19",
-        "ilrs": "1205501",
-        "norad": "38857"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-104",
-        "sp3": "E20",
-        "ilrs": "1205502",
-        "norad": "38858"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-201",
-        "sp3": "E18",
-        "ilrs": "1405001",
-        "norad": "40128"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-202",
-        "sp3": "E14",
-        "ilrs": "1405002",
-        "norad": "40129"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-203",
-        "sp3": "E26",
-        "ilrs": "1501701",
-        "norad": "40544"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-204",
-        "sp3": "E22",
-        "ilrs": "1501702",
-        "norad": "40545"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-205",
-        "sp3": "E24",
-        "ilrs": "1504501",
-        "norad": "40889"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-206",
-        "sp3": "E30",
-        "ilrs": "1504502",
-        "norad": "40890"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-207",
-        "sp3": "E07",
-        "ilrs": "1606901",
-        "norad": "41859"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-208",
-        "sp3": "E08",
-        "ilrs": "1507902",
-        "norad": "41174"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-209",
-        "sp3": "E09",
-        "ilrs": "1507901",
-        "norad": "41175"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-210",
-        "sp3": "E01",
-        "ilrs": "1603002",
-        "norad": "41550"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-211",
-        "sp3": "E02",
-        "ilrs": "1603001",
-        "norad": "41549"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-212",
-        "sp3": "E03",
-        "ilrs": "1606902",
-        "norad": "41860"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-213",
-        "sp3": "E04",
-        "ilrs": "1606903",
-        "norad": "41861"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-214",
-        "sp3": "E05",
-        "ilrs": "1606904",
-        "norad": "41862"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-215",
-        "sp3": "E21",
-        "ilrs": "1707901",
-        "norad": "43055"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-216",
-        "sp3": "E25",
-        "ilrs": "1707902",
-        "norad": "43056"
-    },
-    {
-        "group": "GALILEO",
-        "name": "Galileo-217",
-        "sp3": "E27",
-        "ilrs": "1707903",
-        "norad": "43057"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-G1",
-        "sp3": "C01",
-        "ilrs": "1000101",
-        "norad": "36287"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-G3",
-        "sp3": "C03",
-        "ilrs": "1002401",
-        "norad": "36590"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-G4",
-        "sp3": "C04",
-        "ilrs": "1005701",
-        "norad": "37201"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-G5",
-        "sp3": "C05",
-        "ilrs": "1200801",
-        "norad": "38091"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-G6",
-        "sp3": "C02",
-        "ilrs": "1205901",
-        "norad": "38953"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-G7",
-        "sp3": "C17",
-        "ilrs": "1603701",
-        "norad": "41586"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-I1",
-        "sp3": "C06",
-        "ilrs": "1003601",
-        "norad": "36828"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-I2",
-        "sp3": "C07",
-        "ilrs": "1006801",
-        "norad": "37256"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-I3",
-        "sp3": "C08",
-        "ilrs": "1101301",
-        "norad": "37384"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-I4",
-        "sp3": "C09",
-        "ilrs": "1103801",
-        "norad": "37763"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-I5",
-        "sp3": "C10",
-        "ilrs": "1107301",
-        "norad": "37948"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-M3",
-        "sp3": "C11",
-        "ilrs": "1201801",
-        "norad": "38250"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-M4",
-        "sp3": "C12",
-        "ilrs": "1201802",
-        "norad": "38251"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-M5",
-        "sp3": "C13",
-        "ilrs": "1205001",
-        "norad": "38774"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-M6",
-        "sp3": "C14",
-        "ilrs": "1205002",
-        "norad": "38775"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-I6",
-        "sp3": "C15",
-        "ilrs": "1602101",
-        "norad": "41434"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-M1",
-        "sp3": "C30",
-        "ilrs": "701101",
-        "norad": "31115"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-I1-S",
-        "sp3": "C31",
-        "ilrs": "1501901",
-        "norad": "40549"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-I2-S",
-        "sp3": "C32",
-        "ilrs": "1505301",
-        "norad": "40938"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-M1-S",
-        "sp3": "C33",
-        "ilrs": "1503701",
-        "norad": "40748"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-M2-S",
-        "sp3": "C34",
-        "ilrs": "1503702",
-        "norad": "40749"
-    },
-    {
-        "group": "BeiDou",
-        "name": "BeiDou-M3-S",
-        "sp3": "C35",
-        "ilrs": "1600601",
-        "norad": "41315"
-    },
-    {
-        "group": "QZSS",
-        "name": "QZS-1",
-        "sp3": "J01",
-        "ilrs": "1004501",
-        "norad": "37158"
-    },
-    {
-        "group": "QZSS",
-        "name": "QZS-2",
-        "sp3": "J02",
-        "ilrs": "1702801",
-        "norad": "42738"
-    },
-    {
-        "group": "QZSS",
-        "name": "QZS-3",
-        "sp3": "J03",
-        "ilrs": "1704801",
-        "norad": "42917"
-    },
-    {
-        "group": "QZSS",
-        "name": "QZS-4",
-        "sp3": "J04",
-        "ilrs": "1706201",
-        "norad": "42965"
-    },
-    {
-        "group": "IRNSS",
-        "name": "IRNSS-1A",
-        "sp3": "I01",
-        "ilrs": "1303401",
-        "norad": "39199"
-    },
-    {
-        "group": "IRNSS",
-        "name": "IRNSS-1B",
-        "sp3": "I02",
-        "ilrs": "1401701",
-        "norad": "39635"
-    },
-    {
-        "group": "IRNSS",
-        "name": "IRNSS-1C",
-        "sp3": "I03",
-        "ilrs": "1406101",
-        "norad": "40269"
-    },
-    {
-        "group": "IRNSS",
-        "name": "IRNSS-1D",
-        "sp3": "I04",
-        "ilrs": "1501801",
-        "norad": "40547"
-    },
-    {
-        "group": "IRNSS",
-        "name": "IRNSS-1E",
-        "sp3": "I05",
-        "ilrs": "1600301",
-        "norad": "41241"
-    },
-    {
-        "group": "IRNSS",
-        "name": "IRNSS-1F",
-        "sp3": "I06",
-        "ilrs": "1601501",
-        "norad": "41384"
-    },
-    {
-        "group": "IRNSS",
-        "name": "IRNSS-1G",
-        "sp3": "I07",
-        "ilrs": "1602701",
-        "norad": "41469"
-    },
-    {
-        "group": "IRNSS",
-        "name": "IRNSS-1H",
-        "sp3": "I08",
-        "ilrs": "1705101",
-        "norad": "42928"
-    },
-    {
-        "group": "IRNSS",
-        "name": "IRNSS-1I",
-        "sp3": "I09",
-        "ilrs": "1803501",
-        "norad": "43286"
-    }
+    { "name": "BeiDou-GEO-8", "sp3": "C01", "norad": "44231" },
+    { "name": "BeiDou-GEO-6", "sp3": "C02", "norad": "38953" },
+    { "name": "BeiDou-GEO-7", "sp3": "C03", "norad": "41586" },
+    { "name": "BeiDou-GEO-4", "sp3": "C04", "norad": "37210" },
+    { "name": "BeiDou-GEO-5", "sp3": "C05", "norad": "38091" },
+    { "name": "BeiDou-IGSO-1", "sp3": "C06", "norad": "36828" },
+    { "name": "BeiDou-IGSO-2", "sp3": "C07", "norad": "37256" },
+    { "name": "BeiDou-IGSO-3", "sp3": "C08", "norad": "37384" },
+    { "name": "BeiDou-IGSO-4", "sp3": "C09", "norad": "37763" },
+    { "name": "BeiDou-IGSO-5", "sp3": "C10", "norad": "37948" },
+    { "name": "BeiDou-MEO-3", "sp3": "C11", "norad": "38250" },
+    { "name": "BeiDou-MEO-4", "sp3": "C12", "norad": "38251" },
+    { "name": "BeiDou-IGSO-6", "sp3": "C13", "norad": "41434" },
+    { "name": "BeiDou-MEO-6", "sp3": "C14", "norad": "38775" },
+    { "name": "BeiDou-IGSO-7", "sp3": "C16", "norad": "43539" },
+    { "name": "BeiDou-MEO-1", "sp3": "C19", "norad": "43001" },
+    { "name": "BeiDou-MEO-2", "sp3": "C20", "norad": "43002" },
+    { "name": "BeiDou-MEO-3", "sp3": "C21", "norad": "43208" },
+    { "name": "BeiDou-MEO-4", "sp3": "C22", "norad": "43207" },
+    { "name": "BeiDou-MEO-5", "sp3": "C23", "norad": "43581" },
+    { "name": "BeiDou-MEO-6", "sp3": "C24", "norad": "43582" },
+    { "name": "BeiDou-MEO-11", "sp3": "C25", "norad": "43603" },
+    { "name": "BeiDou-MEO-12", "sp3": "C26", "norad": "43602" },
+    { "name": "BeiDou-MEO-7", "sp3": "C27", "norad": "43107" },
+    { "name": "BeiDou-MEO-8", "sp3": "C28", "norad": "43108" },
+    { "name": "BeiDou-MEO-9", "sp3": "C29", "norad": "43245" },
+    { "name": "BeiDou-MEO-10", "sp3": "C30", "norad": "43246" },
+    { "name": "BeiDou-IGSO-1S", "sp3": "C31", "norad": "40549" },
+    { "name": "BeiDou-MEO-13", "sp3": "C32", "norad": "43622" },
+    { "name": "BeiDou-MEO-14", "sp3": "C33", "norad": "43623" },
+    { "name": "BeiDou-MEO-15", "sp3": "C34", "norad": "43648" },
+    { "name": "BeiDou-MEO-16", "sp3": "C35", "norad": "43647" },
+    { "name": "BeiDou-MEO-17", "sp3": "C36", "norad": "43706" },
+    { "name": "BeiDou-MEO-18", "sp3": "C37", "norad": "43707" },
+    { "name": "BeiDou-IGSO-1", "sp3": "C38", "norad": "44204" },
+    { "name": "BeiDou-IGSO-2", "sp3": "C39", "norad": "44337" },
+    { "name": "BeiDou-IGSO-3", "sp3": "C40", "norad": "44709" },
+    { "name": "BeiDou-MEO-19", "sp3": "C41", "norad": "44864" },
+    { "name": "BeiDou-MEO-20", "sp3": "C42", "norad": "44865" },
+    { "name": "BeiDou-MEO-21", "sp3": "C43", "norad": "44794" },
+    { "name": "BeiDou-MEO-22", "sp3": "C44", "norad": "44793" },
+    { "name": "BeiDou-MEO-23", "sp3": "C45", "norad": "44543" },
+    { "name": "BeiDou-MEO-24", "sp3": "C46", "norad": "44542" },
+    { "name": "Galileo-210 (Danielė)", "sp3": "E01", "norad": "41550" },
+    { "name": "Galileo-211 (Alizée)", "sp3": "E02", "norad": "41549" },
+    { "name": "Galileo-212 (Lisa)", "sp3": "E03", "norad": "41860" },
+    { "name": "Galileo-213 (Kimberley)", "sp3": "E04", "norad": "41861" },
+    { "name": "Galileo-214 (Tijmen)", "sp3": "E05", "norad": "41862" },
+    { "name": "Galileo-207 (Antonianna)", "sp3": "E07", "norad": "41859" },
+    { "name": "Galileo-208 (Andriana)", "sp3": "E08", "norad": "41174" },
+    { "name": "Galileo-209 (Liene)", "sp3": "E09", "norad": "41175" },
+    { "name": "Galileo-101 (Thijs)", "sp3": "E11", "norad": "37846" },
+    { "name": "Galileo-102 (Natalia)", "sp3": "E12", "norad": "37847" },
+    { "name": "Galileo-220 (Samuel)", "sp3": "E13", "norad": "43567" },
+    { "name": "Galileo-202 (Milena)", "sp3": "E14", "norad": "40129" },
+    { "name": "Galileo-221 (Anna)", "sp3": "E15", "norad": "43564" },
+    { "name": "Galileo-201 (Doresa)", "sp3": "E18", "norad": "40128" },
+    { "name": "Galileo-103 (David)", "sp3": "E19", "norad": "38857" },
+    { "name": "Galileo-104 (Sif)", "sp3": "E20", "norad": "38858" },
+    { "name": "Galileo-215 (Nicole)", "sp3": "E21", "norad": "43055" },
+    { "name": "Galileo-204 (Anastasia)", "sp3": "E22", "norad": "40545" },
+    { "name": "Galileo-205 (Alba)", "sp3": "E24", "norad": "40889" },
+    { "name": "Galileo-216 (Zofia)", "sp3": "E25", "norad": "43056" },
+    { "name": "Galileo-203 (Adam)", "sp3": "E26", "norad": "40544" },
+    { "name": "Galileo-217 (Alexandre)", "sp3": "E27", "norad": "43057" },
+    { "name": "Galileo-206 (Oriana)", "sp3": "E30", "norad": "40890" },
+    { "name": "Galileo-218 (Irina)", "sp3": "E31", "norad": "43058" },
+    { "name": "Galileo-222 (Ellen)", "sp3": "E33", "norad": "43565" },
+    { "name": "Galileo-219 (Tara)", "sp3": "E36", "norad": "43566" },
+    { "name": "GPS-BIIF-2", "sp3": "G01", "norad": "37753" },
+    { "name": "GPS-BIIR-13", "sp3": "G02", "norad": "28474" },
+    { "name": "GPS-BIIF-8", "sp3": "G03", "norad": "40294" },
+    { "name": "GPS-BIII-1", "sp3": "G04", "norad": "43873" },
+    { "name": "GPS-BIIRM-8", "sp3": "G05", "norad": "35752" },
+    { "name": "GPS-BIIF-6", "sp3": "G06", "norad": "39741" },
+    { "name": "GPS-BIIRM-6", "sp3": "G07", "norad": "32711" },
+    { "name": "GPS-BIIF-10", "sp3": "G08", "norad": "40730" },
+    { "name": "GPS-BIIF-7", "sp3": "G09", "norad": "40105" },
+    { "name": "GPS-BIIF-11", "sp3": "G10", "norad": "41019" },
+    { "name": "GPS-BIIR-3", "sp3": "G11", "norad": "25933" },
+    { "name": "GPS-BIIRM-3", "sp3": "G12", "norad": "29601" },
+    { "name": "GPS-BIIR-2", "sp3": "G13", "norad": "24876" },
+    { "name": "GPS-BIII-4", "sp3": "G14", "norad": "46826" },
+    { "name": "GPS-BIIRM-4", "sp3": "G15", "norad": "32260" },
+    { "name": "GPS-BIIR-8", "sp3": "G16", "norad": "27663" },
+    { "name": "GPS-BIIRM-1", "sp3": "G17", "norad": "28874" },
+    { "name": "GPS-BIII-2", "sp3": "G18", "norad": "44506" },
+    { "name": "GPS-BIIR-11", "sp3": "G19", "norad": "28190" },
+    { "name": "GPS-BIIR-4", "sp3": "G20", "norad": "26360" },
+    { "name": "GPS-BIIR-9", "sp3": "G21", "norad": "27704" },
+    { "name": "GPS-BIIR-10", "sp3": "G22", "norad": "28129" },
+    { "name": "GPS-BIII-3", "sp3": "G23", "norad": "45854" },
+    { "name": "GPS-BIIF-3", "sp3": "G24", "norad": "38833" },
+    { "name": "GPS-BIIF-1", "sp3": "G25", "norad": "36585" },
+    { "name": "GPS-BIIF-9", "sp3": "G26", "norad": "40534" },
+    { "name": "GPS-BIIF-4", "sp3": "G27", "norad": "39166" },
+    { "name": "GPS-BIIR-5", "sp3": "G28", "norad": "26407" },
+    { "name": "GPS-BIIRM-5", "sp3": "G29", "norad": "32384" },
+    { "name": "GPS-BIIF-5", "sp3": "G30", "norad": "39533" },
+    { "name": "GPS-BIIRM-2", "sp3": "G31", "norad": "29486" },
+    { "name": "GPS-BIIF-12", "sp3": "G32", "norad": "41328" },
+    { "name": "QZS-1", "sp3": "J01", "norad": "37158" },
+    { "name": "QZS-2", "sp3": "J02", "norad": "42738" },
+    { "name": "QZS-3", "sp3": "J03", "norad": "42917" },
+    { "name": "QZS-4", "sp3": "J04", "norad": "42965" },
+    { "name": "CryoSat-2", "sp3": "L12", "norad": "36508" },
+    { "name": "Jason-3", "sp3": "L39", "norad": "41240" },
+    { "name": "Sentinel-6A (Jason CS)", "sp3": "L40", "norad": "46984" },
+    { "name": "SARAL", "sp3": "L46", "norad": "39086" },
+    { "name": "Swarm-A", "sp3": "L47", "norad": "39452" },
+    { "name": "Swarm-B", "sp3": "L48", "norad": "39451" },
+    { "name": "Swarm-C", "sp3": "L49", "norad": "39453" },
+    { "name": "Ajisai", "sp3": "L50", "norad": "16908" },
+    { "name": "LAGEOS-1", "sp3": "L51", "norad": "8820" },
+    { "name": "LAGEOS-2", "sp3": "L52", "norad": "22195" },
+    { "name": "Etalon-1", "sp3": "L53", "norad": "19751" },
+    { "name": "Etalon-2", "sp3": "L54", "norad": "20026" },
+    { "name": "Starlette", "sp3": "L55", "norad": "7646" },
+    { "name": "Stella", "sp3": "L56", "norad": "22824" },
+    { "name": "Larets", "sp3": "L59", "norad": "27944" },
+    { "name": "LARES", "sp3": "L60", "norad": "38077" },
+    { "name": "HY-2C", "sp3": "L69", "norad": "46469" },
+    { "name": "Sentinel-3A", "sp3": "L74", "norad": "41335" },
+    { "name": "HY-2D", "sp3": "L78", "norad": "48621" },
+    { "name": "Sentinel-3B", "sp3": "L98", "norad": "43437" },
+    { "name": "GLONASS-730 (COSMOS 2456)", "sp3": "R01", "norad": "36111" },
+    { "name": "GLONASS-747 (COSMOS 2485)", "sp3": "R02", "norad": "39155" },
+    { "name": "GLONASS-744 (COSMOS 2476)", "sp3": "R03", "norad": "37867" },
+    { "name": "GLONASS-759 (COSMOS 2544)", "sp3": "R04", "norad": "44850" },
+    { "name": "GLONASS-756 (COSMOS 2527)", "sp3": "R05", "norad": "43508" },
+    { "name": "GLONASS-733 (COSMOS 2457)", "sp3": "R06", "norad": "36112" },
+    { "name": "GLONASS-745 (COSMOS 2477)", "sp3": "R07", "norad": "37868" },
+    { "name": "GLONASS-743 (COSMOS 2475)", "sp3": "R08", "norad": "37869" },
+    { "name": "GLONASS-702 (COSMOS 2501)", "sp3": "R09", "norad": "40315" },
+    { "name": "GLONASS-723 (COSMOS 2436)", "sp3": "R10", "norad": "32395" },
+    { "name": "GLONASS-705 (COSMOS 2547)", "sp3": "R11", "norad": "46805" },
+    { "name": "GLONASS-758 (COSMOS 2534)", "sp3": "R12", "norad": "44299" },
+    { "name": "GLONASS-721 (COSMOS 2434)", "sp3": "R13", "norad": "32393" },
+    { "name": "GLONASS-752 (COSMOS 2522)", "sp3": "R14", "norad": "42939" },
+    { "name": "GLONASS-757 (COSMOS 2529)", "sp3": "R15", "norad": "43687" },
+    { "name": "GLONASS-736 (COSMOS 2464)", "sp3": "R16", "norad": "37139" },
+    { "name": "GLONASS-751 (COSMOS 2514)", "sp3": "R17", "norad": "41330" },
+    { "name": "GLONASS-754 (COSMOS 2492)", "sp3": "R18", "norad": "39620" },
+    { "name": "GLONASS-720 (COSMOS 2433)", "sp3": "R19", "norad": "32275" },
+    { "name": "GLONASS-719 (COSMOS 2432)", "sp3": "R20", "norad": "32276" },
+    { "name": "GLONASS-755 (COSMOS 2500)", "sp3": "R21", "norad": "40001" },
+    { "name": "GLONASS-735 (COSMOS 2461)", "sp3": "R22", "norad": "36401" },
+    { "name": "GLONASS-732 (COSMOS 2460)", "sp3": "R23", "norad": "36402" },
+    { "name": "GLONASS-760 (COSMOS 2545)", "sp3": "R24", "norad": "45358" }
 ]
