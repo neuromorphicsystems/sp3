@@ -104,11 +104,6 @@ class Satellite:
     accuracy: typing.Optional[float]  # m
     records: list[Record]
 
-    def propagate(
-        self, begin: datetime.datetime, duration: datetime.timedelta, samples: int
-    ):
-        assert samples > 0
-
 
 @dataclasses.dataclass
 class Product:

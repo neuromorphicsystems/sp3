@@ -43,10 +43,21 @@ GLONASS:
 -   http://www.csno-tarc.cn/en/glonass/constellation
 -   https://celestrak.com/NORAD/elements/table.php?tleFile=glo-ops&title=GLONASS%20Operational%20Satellites
 
+## Tests and figures
+
+-   `python3 test.py` runs parsing tests.
+-   `python3 plot_interpolation.py` generates decimated polynomial interpolations graphs with errors (position only).
+-   `python3 plot_velocities.py` generates position and velocity graphs. Velocity is interpolated when velocity samples are available and is calculated from the position otherwise.
+-   `python3 plot_window_to_error` calculates the error on decimated samples for different polynomial window / polynomial degree combinations.
+
+The output of plot scripts is saved to _renders_.
+
 ## Contribute
 
 Run `black .` to format the source code (see https://github.com/psf/black).
+
 Run `pyright .` to check types (see https://github.com/microsoft/pyright).
+
 Run `python3 test.py` to run unit tests.
 
 ## Publish

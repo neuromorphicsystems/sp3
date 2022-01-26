@@ -99,15 +99,21 @@ class Provider:
         download_directory: pathlib.Path,
         force: bool,
     ):
-        parameters = self.time_to_parameters(time)
-        download_directory.mkdir(parents=True, exist_ok=True)
-        name = self.name_template.format(**parameters)
-        if not force and (download_directory / name).is_file():
+        name: typing.Optional[str] = None
+        try:
+            parameters = self.time_to_parameters(time)
+            download_directory.mkdir(parents=True, exist_ok=True)
+            name = self.name_template.format(**parameters)
+            if not force and (download_directory / name).is_file():
+                return download_directory / name
+            with open(download_directory / f"{name}.download", "wb") as output:
+                self.download_to(output, parameters)
+            (download_directory / f"{name}.download").rename(download_directory / name)
             return download_directory / name
-        with open(download_directory / f"{name}.download", "wb") as output:
-            self.download_to(output, parameters)
-        (download_directory / f"{name}.download").rename(download_directory / name)
-        return download_directory / name
+        except requests.exceptions.HTTPError as error:
+            if error.response.status_code == 404 and name is not None:
+                (download_directory / f"{name}.download").unlink(missing_ok=True)
+            raise error
 
 
 @dataclasses.dataclass
@@ -167,7 +173,7 @@ class CddisProvider(Provider):
             )
             if cddis.username is None or cddis.password is None:
                 raise Exception(
-                    "sp3.cddis.username and sp3.cddis.password must be set before downloading CDDIS data"
+                    "sp3.cddis.username and sp3.cddis.password aare required to download CDDIS data, visit http://urs.earthdata.nasa.gov to register"
                 )
             parser = CddisProvider.UrsEarthdataOauth()
             parser.feed(response.text)
@@ -210,6 +216,7 @@ class CddisSearchProvider(CddisProvider):
         download_directory.mkdir(parents=True, exist_ok=True)
         http_error: typing.Optional[requests.exceptions.HTTPError] = None
         for offset in range(0, self.begin_end_delta):
+            name: typing.Optional[str] = None
             try:
                 parameters = self.time_to_parameters(
                     time - datetime.timedelta(days=offset)
@@ -224,8 +231,12 @@ class CddisSearchProvider(CddisProvider):
                 )
                 return download_directory / name
             except requests.exceptions.HTTPError as error:
-                if error.errno == 404:
+                if error.response.status_code == 404:
                     logging.info(f'"{error.request.url}" returned error 404')
+                    if name is not None:
+                        (download_directory / f"{name}.download").unlink(
+                            missing_ok=True
+                        )
                     http_error = error
                     continue
                 raise error
