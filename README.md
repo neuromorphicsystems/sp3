@@ -103,15 +103,15 @@ Each spatial coordinate (`x`, `y` and `z` in ITRS) uses a different piecewise po
 
 The figure below shows a plot of the resulting curves for satellite G13 (GPS-BIIR-2, NORAD 24876) with default parameters (`window = 5`, `degree = 10`). Similar plots for other satellites can be found in _renders_.
 
-![renders/ESA0MGNFIN_20213460000_01D_05M_ORB_G13_velocity_window5_degree10.png](renders/ESA0MGNFIN_20213460000_01D_05M_ORB_G13_velocity_window5_degree10.png)
+![renders/ESA0MGNFIN_20213460000_01D_05M_ORB_G13_velocity_window5_degree10.png](https://raw.githubusercontent.com/neuromorphicsystems/sp3/main/renders/ESA0MGNFIN_20213460000_01D_05M_ORB_G13_velocity_window5_degree10.png)
 
 We estimate the method's error by using odd samples for fitting and even samples to evaluate errors.
 
-![renders/ESA0MGNFIN_20213460000_01D_05M_ORB_G13_interpolation_window5_degree10.png](renders/ESA0MGNFIN_20213460000_01D_05M_ORB_G13_interpolation_window5_degree10.png)
+![renders/ESA0MGNFIN_20213460000_01D_05M_ORB_G13_interpolation_window5_degree10.png](https://raw.githubusercontent.com/neuromorphicsystems/sp3/main/renders/ESA0MGNFIN_20213460000_01D_05M_ORB_G13_interpolation_window5_degree10.png)
 
 The table below shows the maximum error for different pairs `(window, degree)`. Pairs where `window * 2 + 1 ≤ degree` are not evaluated since they yield ill-defined fitting problems.
 
-![ESA0MGNFIN_20213460000_01D_05M_ORB_G13_window_to_error.png](renders/ESA0MGNFIN_20213460000_01D_05M_ORB_G13_window_to_error.png)
+![renders/ESA0MGNFIN_20213460000_01D_05M_ORB_G13_window_to_error.png](https://raw.githubusercontent.com/neuromorphicsystems/sp3/main/renders/ESA0MGNFIN_20213460000_01D_05M_ORB_G13_window_to_error.png)
 
 ## API
 
