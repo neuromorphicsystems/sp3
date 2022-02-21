@@ -1,18 +1,21 @@
-- [Get started](#get-started)
-- [Providers](#providers)
-- [Satellites](#satellites)
-- [Interpolation](#interpolation)
-- [API](#api)
-  - [High-level](#high-level)
-  - [Low-level](#low-level)
-    - [Parser](#parser)
-    - [Interpolation](#interpolation-1)
-- [Tests and figures](#tests-and-figures)
-- [Contribute](#contribute)
-  - [Format](#format)
-  - [Publish](#publish)
+# SP3
 
 Download and interpolate precise ephemeris in SP3 (-c or -d) format.
+
+- [SP3](#sp3)
+  - [Get started](#get-started)
+  - [Providers](#providers)
+  - [Satellites](#satellites)
+  - [Interpolation](#interpolation)
+  - [API](#api)
+    - [High-level](#high-level)
+    - [Low-level](#low-level)
+      - [Parser](#parser)
+      - [Interpolation](#interpolation-1)
+  - [Tests and figures](#tests-and-figures)
+  - [Contribute](#contribute)
+    - [Format](#format)
+    - [Publish](#publish)
 
 ## Get started
 
@@ -327,7 +330,6 @@ Run `python3 test.py` to run unit tests.
 ### Publish
 
 ```
-rm -rf dist
-python3 setup.py sdist
+rm -rf sp3.egg-info; rm -rf dist; python3 setup.py sdist
 python3 -m twine upload dist/*
 ```
