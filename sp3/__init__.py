@@ -5,12 +5,14 @@ import astropy.time
 import collections
 import datetime
 import dataclasses
+import erfa
 import functools
 import itertools
 import logging
 import numpy
 import pathlib
 import requests
+import scipy.optimize
 import typing
 from . import provider as provider
 from . import satellite as satellite
@@ -378,12 +380,6 @@ def altaz(
     window: int = 5,
     degree: int = 10,
 ) -> astropy.coordinates.AltAz:
-    import astropy.constants
-    import astropy.coordinates
-    import astropy.units
-    import erfa
-    import scipy.optimize
-
     begin, end = obstime_to_begin_and_end(obstime)
     piecewise_polynomial = records_to_piecewise_polynomial(
         records=load(
@@ -464,13 +460,13 @@ def altaz(
     tan_distance_to_zenith = numpy.tan(distance_to_zenith)
     alt_refraction_correction = (
         refraction_a * tan_distance_to_zenith
-        + refraction_b * (tan_distance_to_zenith ** 3)
+        + refraction_b * (tan_distance_to_zenith**3)
     ) * astropy.units.Unit("rad")
     # derivative of a tan(π / 2 - alt) + b tan(π / 2 - alt)³
     pm_alt_refraction_correction = (
         -altaz_vacuo.pm_alt
         * (numpy.cos(distance_to_zenith) ** -2)
-        * (refraction_a + 3 * refraction_b * tan_distance_to_zenith ** 2)
+        * (refraction_a + 3 * refraction_b * tan_distance_to_zenith**2)
     )
     return astropy.coordinates.AltAz(
         alt=altaz_vacuo.alt + alt_refraction_correction,

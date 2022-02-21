@@ -277,16 +277,12 @@ class Product:
                 ) + datetime.timedelta(
                     seconds=int(match[1]) * 7 * 24 * 60 * 60 + float(match[2])
                 )
-                assert (
-                    start
-                    == datetime.datetime(
-                        year=1980,
-                        month=1,
-                        day=6,
-                        tzinfo=datetime.timezone.utc,
-                    )
-                    + datetime.timedelta(days=int(match[4]) - 44244 + float(match[5]))
-                )
+                assert start == datetime.datetime(
+                    year=1980,
+                    month=1,
+                    day=6,
+                    tzinfo=datetime.timezone.utc,
+                ) + datetime.timedelta(days=int(match[4]) - 44244 + float(match[5]))
                 epoch_interval = datetime.timedelta(seconds=float(match[3]))
             elif id == b"+0" or id == b"+":
                 if id == b"+0":
@@ -309,7 +305,7 @@ class Product:
                         exponent = int(stripped_slice)
                         if satellite_index < len(product.satellites):
                             product.satellites[satellite_index].accuracy = (
-                                None if exponent == 0 else ((2.0 ** exponent) / 1000.0)
+                                None if exponent == 0 else ((2.0**exponent) / 1000.0)
                             )
                             satellite_index += 1
                         elif exponent > 0:

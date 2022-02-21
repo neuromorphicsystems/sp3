@@ -6,7 +6,7 @@ with open("README.md") as file:
 
 setuptools.setup(
     name="sp3",
-    version="0.0.2",
+    version="1.0.0",
     url="https://github.com/neuromorphicsystems/sp3",
     author="Alexandre Marcireau",
     author_email="alexandre.marcireau@gmail.com",
@@ -17,6 +17,7 @@ setuptools.setup(
         "astropy >= 4.0",
         "numpy >= 1.20",
         "requests >= 2.0",
+        "scipy >= 1.8",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
