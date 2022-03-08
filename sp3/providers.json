@@ -337,7 +337,6 @@
         "sp3_ids": ["L69"],
         "begin_end_delta": 10
     },
-
     {
         "type": "cddis_search",
         "name_template": "ssas3a20.b{year_2_digits}{day_of_year}.e{plus_10_days_year_2_digits}{plus_10_days_day_of_year}.DG_.sp3",

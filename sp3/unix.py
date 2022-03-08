@@ -2,7 +2,9 @@ from __future__ import annotations
 import io
 import typing
 
+BUFFER_SIZE: int = 4096
 
+# Adapted from https://github.com/umeat/unlzw to support buffered processing.
 def uncompress(input: typing.IO[bytes], output: typing.IO[bytes]):
     header = True
     buffer = b""
@@ -18,10 +20,10 @@ def uncompress(input: typing.IO[bytes], output: typing.IO[bytes]):
     offset = 2
     skip = 0
     mid_code = False
-    prefix: list[int] = [0] * 65536
-    suffix: list[int] = [0] * 65536
+    code_map: list[int] = [0] * 65536
+    dictionary = bytearray(65536)
     while True:
-        buffer += input.read(4096)
+        buffer += input.read(BUFFER_SIZE)
         if len(buffer) == 0:
             break
         buffer = buffer[skip:]
@@ -53,9 +55,7 @@ def uncompress(input: typing.IO[bytes], output: typing.IO[bytes]):
             header = False
             buffer = buffer[5:]
         while len(buffer) > 0:
-            if mid_code:
-                mid_code = False
-            elif end >= mask and bits < maximum:
+            if not mid_code and end >= mask and bits < maximum:
                 remainder = offset % bits
                 code = 0
                 left = 0
@@ -65,9 +65,10 @@ def uncompress(input: typing.IO[bytes], output: typing.IO[bytes]):
                     skip = bits - remainder
                     if len(buffer) > skip:
                         buffer = buffer[skip:]
+                        skip = 0
                     else:
-                        buffer = b""
                         skip -= len(buffer)
+                        buffer = b""
                         bits += 1
                         break
                 bits += 1
@@ -75,13 +76,15 @@ def uncompress(input: typing.IO[bytes], output: typing.IO[bytes]):
             buffer = buffer[1:]
             offset += 1
             left += 8
-            if left < bits:
+            if mid_code:
+                mid_code = False
+            elif left < bits:
                 mid_code = True
                 continue
             masked_code = code & mask
             code >>= bits
             left -= bits
-            if masked_code == 0xFF and block_compressed:
+            if masked_code == 0x100 and block_compressed:
                 remainder = offset % bits
                 code = 0
                 left = 0
@@ -92,14 +95,15 @@ def uncompress(input: typing.IO[bytes], output: typing.IO[bytes]):
                     skip = bits - remainder
                     if len(buffer) > skip:
                         buffer = buffer[skip:]
+                        skip = 0
                     else:
-                        buffer = b""
                         skip -= len(buffer)
+                        buffer = b""
                         bits = 9
                         break
                 bits = 9
                 continue
-            stack = []
+            stack = bytearray()
             current_masked_code = masked_code
             if masked_code > end:
                 if masked_code != end + 1 or previous_code > end:
@@ -107,16 +111,16 @@ def uncompress(input: typing.IO[bytes], output: typing.IO[bytes]):
                 stack.append(final)
                 masked_code = previous_code
             while masked_code > 0xFF:
-                stack.append(suffix[masked_code])
-                masked_code = prefix[masked_code]
+                stack.append(dictionary[masked_code])
+                masked_code = code_map[masked_code]
             stack.append(masked_code)
             final = masked_code
             if end < mask:
                 end += 1
-                prefix[end] = previous_code
-                suffix[end] = final
+                code_map[end] = previous_code
+                dictionary[end] = final
             previous_code = current_masked_code
-            output.write(bytes(stack[::-1]))
+            output.write(stack[::-1])
 
 
 if __name__ == "__main__":

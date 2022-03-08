@@ -9,48 +9,84 @@ import typing
 from . import timesystem
 
 
-id_to_pattern = {
-    b"0": re.compile(
-        rb"^#([cd])([PV])(\d{4}) ( \d|\d{2}) ( \d|\d{2}) ( \d|\d{2}) ( \d|\d{2}) ((?: \d|\d{2})\.\d{8}) ([ \d]{7}) (.{5}) (.{5}) (.{3}) (.{4})(?:$|\s+$)"
+id_to_patterns: dict[bytes, tuple[re.Pattern[bytes], ...]] = {
+    b"0": (
+        re.compile(
+            rb"^#([cd])([PV])(\d{4}) ( \d|\d{2}) ( \d|\d{2}) ( \d|\d{2}) ( \d|\d{2}) ((?: \d|\d{2})\.\d{8}) ([ \d]{7}) (.{5}) (.{5}) (.{3}) (.{4})(?:$|\s+$)"
+        ),
     ),
-    b"1": re.compile(
-        rb"^## ([ \d]{4}) ([ \.\d]{6}\.\d{8}) ([ \d]{5}\.\d{8}) ([ \d]{5}) ([ \d]{1}\.\d{13})(?:$|\s+$)"
+    b"1": (
+        re.compile(
+            rb"^## ([ \d]{4}) ([ \.\d]{6}\.\d{8}) ([ \d]{5}\.\d{8}) ([ \d]{5}) ([ \d]{1}\.\d{13})(?:$|\s+$)"
+        ),
     ),
-    b"+0": re.compile(rb"^\+  ([ \d]{3})   ((?:\w\d{2})*).*(?:$|\s+$)"),
-    b"+": re.compile(rb"^\+        ((?:\w\d{2})*).*(?:$|\s+$)"),
-    b"++": re.compile(rb"^\+\+       ((?:[ \d]{3})*)(?:$|\s+$)"),
-    b"c0": re.compile(
-        rb"^%c ([\w ]{2}) cc ([\w ]{3}) ccc cccc cccc cccc.cccc ccccc ccccc ccccc ccccc(?:$|\s+$)"
+    b"+0": (re.compile(rb"^\+  ([ \d]{3})   ((?:\w\d{2})*).*(?:$|\s+$)"),),
+    b"+": (re.compile(rb"^\+        ((?:\w\d{2})*).*(?:$|\s+$)"),),
+    b"++": (
+        re.compile(rb"^\+\+       ((?:[ \d]{3})*)(?:$|\s+$)"),
+        re.compile(rb"^\+\+$"),
     ),
-    b"c1": re.compile(
-        rb"^%c cc cc ccc ccc cccc cccc cccc.cccc ccccc ccccc ccccc ccccc(?:$|\s+$)"
+    b"c0": (
+        re.compile(
+            rb"^%c ([\w ]{2}) cc ([\w ]{3}) ccc cccc cccc cccc.cccc ccccc ccccc ccccc ccccc(?:$|\s+$)"
+        ),
     ),
-    b"f0": re.compile(
-        rb"^%f ([ \d]{2}\.\d{7}) ([ \d]{2}\.\d{9})  0\.00000000000  0\.000000000000000(?:$|\s+$)"
+    b"c1": (
+        re.compile(
+            rb"^%c cc cc ccc ccc cccc cccc cccc.cccc ccccc ccccc ccccc ccccc(?:$|\s+$)"
+        ),
     ),
-    b"f1": re.compile(
-        rb"^%f  0\.0000000  0\.000000000  0\.00000000000  0\.000000000000000(?:$|\s+$)"
+    b"f0": (
+        re.compile(
+            rb"^%f ([ \d]{2}\.\d{7}) ([ \d]{2}\.\d{9})  0\.00000000000  0\.000000000000000(?:$|\s+$)"
+        ),
     ),
-    b"i": re.compile(
-        rb"^%i    0    0    0    0      0      0      0      0         0(?:$|\s+$)"
+    b"f1": (
+        re.compile(
+            rb"^%f  0\.0000000  0\.000000000  0\.00000000000  0\.000000000000000(?:$|\s+$)"
+        ),
     ),
-    b"/": re.compile(rb"^/\*($| .*)(?:$|\s+$)"),
-    b"*": re.compile(
-        rb"^\*  (\d{4}) ( \d|\d{2}) ( \d|\d{2}) ( \d|\d{2}) ( \d|\d{2}) ((?: \d|\d{2})\.\d{8})(?:$|\s+$)"
+    b"i": (
+        re.compile(
+            rb"^%i    0    0    0    0      0      0      0      0         0(?:$|\s+$)"
+        ),
     ),
-    b"p": re.compile(
-        rb"^P(\w\d{2})([ \d-]{7}\.\d{6})([ \d-]{7}\.\d{6})([ \d-]{7}\.\d{6})(?:([ \d-]{7}\.\d{6}| {14})(?: ([ \d]{2}) ([ \d]{2}) ([ \d]{2}) ([ \d]{3}) ([ \w])([ \w])|)|)(?:$|\s+$)"
+    b"/": (re.compile(rb"^/\*($| .*)(?:$|\s+$)"),),
+    b"*": (
+        re.compile(
+            rb"^\*  (\d{4}) ( \d|\d{2}) ( \d|\d{2}) ( \d|\d{2}) ( \d|\d{2}) ((?: \d|\d{2})\.\d{8})(?:$|\s+$)"
+        ),
     ),
-    b"ep": re.compile(
-        rb"^EP  ([ \d]{4}) ([ \d]{4}) ([ \d]{4}) ([ \d]{7}) ([ \d]{8}) ([ \d]{8}) ([ \d]{8}) ([ \d]{8}) ([ \d]{8}) ([ \d]{8})(?:$|\s+$)$"
+    b"p": (
+        re.compile(
+            rb"^P(\w\d{2})([ \d-]{7}\.\d{6})([ \d-]{7}\.\d{6})([ \d-]{7}\.\d{6})(?:([ \d-]{7}\.\d{6}| {14})(?: ([ \d]{2}) ([ \d]{2}) ([ \d]{2}) ([ \d]{3}) ([ \w])([ \w])|)|)(?:$|\s+$)"
+        ),
     ),
-    b"v": re.compile(
-        rb"^V(\w\d{2})([ \d-]{7}\.\d{6})([ \d-]{7}\.\d{6})([ \d-]{7}\.\d{6})(?:([ \d-]{7}\.\d{6}| {14}) ([ \d]{2}) ([ \d]{2}) ([ \d]{2}) ([ \d]{3})|)(?:$|\s+$)"
+    b"ep": (
+        re.compile(
+            rb"^EP  ([ \d]{4}) ([ \d]{4}) ([ \d]{4}) ([ \d]{7}) ([ \d]{8}) ([ \d]{8}) ([ \d]{8}) ([ \d]{8}) ([ \d]{8}) ([ \d]{8})(?:$|\s+$)$"
+        ),
     ),
-    b"ev": re.compile(
-        rb"^EV  ([ \d]{4}) ([ \d]{4}) ([ \d]{4}) ([ \d]{7}) ([ \d]{8}) ([ \d]{8}) ([ \d]{8}) ([ \d]{8}) ([ \d]{8}) ([ \d]{8})(?:$|\s+$)$"
+    b"v": (
+        re.compile(
+            rb"^V(\w\d{2})([ \d-]{7}\.\d{6})([ \d-]{7}\.\d{6})([ \d-]{7}\.\d{6})"
+        ),
+        re.compile(
+            rb"^V(\w\d{2})([ \d-]{7}\.\d{6})([ \d-]{7}\.\d{6})([ \d-]{7}\.\d{6})([ \d-]{7}\.\d{6})(?:$|\s+$)"
+        ),
+        re.compile(
+            rb"^V(\w\d{2})([ \d-]{7}\.\d{6})([ \d-]{7}\.\d{6})([ \d-]{7}\.\d{6}) {14} ([ \d]{2}) ([ \d]{2}) ([ \d]{2}) ([ \d]{3})(?:$|\s+$)"
+        ),
+        re.compile(
+            rb"^V(\w\d{2})([ \d-]{7}\.\d{6})([ \d-]{7}\.\d{6})([ \d-]{7}\.\d{6})([ \d-]{7}\.\d{6}) ([ \d]{2}) ([ \d]{2}) ([ \d]{2}) ([ \d]{3})(?:$|\s+$)"
+        ),
     ),
-    b"eof": re.compile(rb"^EOF\s*$"),
+    b"ev": (
+        re.compile(
+            rb"^EV  ([ \d]{4}) ([ \d]{4}) ([ \d]{4}) ([ \d]{7}) ([ \d]{8}) ([ \d]{8}) ([ \d]{8}) ([ \d]{8}) ([ \d]{8}) ([ \d]{8})(?:$|\s+$)$"
+        ),
+    ),
+    b"eof": (re.compile(rb"^EOF\s*$"),),
 }
 
 
@@ -236,10 +272,14 @@ class Product:
                 else:
                     raise Exception(f"unknown state {state}")
             assert id is not None
-            match = id_to_pattern[id].match(line)
+            match: typing.Optional[re.Match[bytes]] = None
+            for pattern in id_to_patterns[id]:
+                match = pattern.match(line)
+                if match is not None:
+                    break
             if match is None:
                 raise Exception(
-                    f'SP3 line {index + 1} ("{line.decode()}") did not match the pattern "{id.decode()}"'
+                    f'SP3 line {index + 1} ("{line}") did not match the pattern "{id}"'
                 )
             if id == b"0":
                 product = Product(
@@ -299,19 +339,25 @@ class Product:
                     )
             elif id == b"++":
                 assert product is not None
-                for slice_start in range(0, len(match[1]), 3):
-                    stripped_slice = match[1][slice_start : slice_start + 3].strip()
-                    if len(stripped_slice) > 0:
-                        exponent = int(stripped_slice)
-                        if satellite_index < len(product.satellites):
-                            product.satellites[satellite_index].accuracy = (
-                                None if exponent == 0 else ((2.0**exponent) / 1000.0)
-                            )
-                            satellite_index += 1
-                        elif exponent > 0:
-                            raise Exception(
-                                "there are more accuracy fields than satellites"
-                            )
+                if len(match.groups()) < 1:
+                    # L69 data (and perhaps others) sometimes has no data (empty line) after '++'
+                    pass
+                else:
+                    for slice_start in range(0, len(match[1]), 3):
+                        stripped_slice = match[1][slice_start : slice_start + 3].strip()
+                        if len(stripped_slice) > 0:
+                            exponent = int(stripped_slice)
+                            if satellite_index < len(product.satellites):
+                                product.satellites[satellite_index].accuracy = (
+                                    None
+                                    if exponent == 0
+                                    else ((2.0**exponent) / 1000.0)
+                                )
+                                satellite_index += 1
+                            elif exponent > 0:
+                                raise Exception(
+                                    "there are more accuracy fields than satellites"
+                                )
             elif id == b"c0":
                 assert product is not None
                 product.file_type = FileType(match[1].strip())
@@ -404,32 +450,31 @@ class Product:
                 assert product is not None
                 assert satellite_index < len(product.satellites)
                 assert match[1] == product.satellites[satellite_index].id
+                groups_count = len(match.groups())
                 product.satellites[satellite_index].records[-1].velocity = (
                     float(match[2]) * 1e-1,
                     float(match[3]) * 1e-1,
                     float(match[4]) * 1e-1,
                 )
-                if match[5] is not None and len(match[5].strip()) > 0:
+                if groups_count == 5 or groups_count == 9:
                     product.satellites[satellite_index].records[-1].clock_rate = float(
                         match[5]
                     )
-                if (
-                    match[6] is not None
-                    and len(match[6].strip()) > 0
-                    and match[7] is not None
-                    and len(match[7].strip()) > 0
-                    and match[8] is not None
-                    and len(match[8].strip()) > 0
-                ):
-                    product.satellites[satellite_index].records[-1].velocity_std = (
-                        (position_base ** float(match[6])) * 1e-7,
-                        (position_base ** float(match[7])) * 1e-7,
-                        (position_base ** float(match[8])) * 1e-7,
-                    )
-                if match[9] is not None and len(match[9].strip()) > 0:
-                    product.satellites[satellite_index].records[-1].clock_rate_std = (
-                        clock_base ** float(match[9])
-                    ) * 1e-16
+                if groups_count == 9:
+                    if (
+                        len(match[6].strip()) > 0
+                        and len(match[7].strip()) > 0
+                        and len(match[8].strip()) > 0
+                    ):
+                        product.satellites[satellite_index].records[-1].velocity_std = (
+                            (position_base ** float(match[6])) * 1e-7,
+                            (position_base ** float(match[7])) * 1e-7,
+                            (position_base ** float(match[8])) * 1e-7,
+                        )
+                    if len(match[9].strip()) > 0:
+                        product.satellites[satellite_index].records[
+                            -1
+                        ].clock_rate_std = (clock_base ** float(match[9])) * 1e-16
             elif id == b"ev":
                 assert product is not None
                 assert satellite_index < len(product.satellites)

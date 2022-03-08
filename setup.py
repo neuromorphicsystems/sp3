@@ -6,7 +6,7 @@ with open("README.md") as file:
 
 setuptools.setup(
     name="sp3",
-    version="1.0.3",
+    version="1.0.4",
     url="https://github.com/neuromorphicsystems/sp3",
     author="Alexandre Marcireau",
     author_email="alexandre.marcireau@gmail.com",

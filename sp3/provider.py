@@ -62,9 +62,9 @@ class Provider:
             "month_2_digits": f"{time.month:02d}",
             "day_2_digits": f"{time.day:02d}",
             "day_of_year": f"{time.timetuple().tm_yday:03d}",
-            "plus_8_days_year_2_digits": f"{plus_8_days.day:02d}",
+            "plus_8_days_year_2_digits": f"{(plus_8_days.year % 100):02d}",
             "plus_8_days_day_of_year": f"{plus_8_days.timetuple().tm_yday:03d}",
-            "plus_10_days_year_2_digits": f"{plus_10_days.day:02d}",
+            "plus_10_days_year_2_digits": f"{(plus_10_days.year % 100):02d}",
             "plus_10_days_day_of_year": f"{plus_10_days.timetuple().tm_yday:03d}",
             "gps_week": gps_week,
             "gps_day": math.floor(gps_seconds / (60 * 60 * 24) - gps_week * 7),
@@ -173,7 +173,7 @@ class CddisProvider(Provider):
             )
             if cddis.username is None or cddis.password is None:
                 raise Exception(
-                    "sp3.cddis.username and sp3.cddis.password aare required to download CDDIS data, visit http://urs.earthdata.nasa.gov to register"
+                    "sp3.cddis.username and sp3.cddis.password are required to download CDDIS data, visit http://urs.earthdata.nasa.gov to register"
                 )
             parser = CddisProvider.UrsEarthdataOauth()
             parser.feed(response.text)
