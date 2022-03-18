@@ -215,6 +215,14 @@ class CddisSearchProvider(CddisProvider):
     ):
         download_directory.mkdir(parents=True, exist_ok=True)
         http_error: typing.Optional[requests.exceptions.HTTPError] = None
+        if not force:
+            for offset in range(0, self.begin_end_delta):
+                parameters = self.time_to_parameters(
+                    time - datetime.timedelta(days=offset)
+                )
+                name = self.name_template.format(**parameters)
+                if (download_directory / name).is_file():
+                    return download_directory / name
         for offset in range(0, self.begin_end_delta):
             name: typing.Optional[str] = None
             try:
