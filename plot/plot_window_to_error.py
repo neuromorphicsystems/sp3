@@ -15,12 +15,12 @@ parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFo
 parser.add_argument(
     "--product",
     default=None,
-    help=f"path to the SP3 product file (defaults to all files in {dirname / 'test_products'})",
+    help=f"path to the SP3 product file (defaults to all files in {dirname.parent / 'test_products'})",
 )
 parser.add_argument(
     "--satellite",
     default=None,
-    help="satellite SP3 id (defualts to the first satellite in the file)",
+    help="satellite SP3 id (defaults to the first satellite in the file)",
 )
 args = parser.parse_args()
 
@@ -29,7 +29,7 @@ degrees = tuple(range(1, 17))
 windows = tuple(range(1, 9))
 
 if args.product is None:
-    products_paths = (dirname / "test_products").iterdir()
+    products_paths = (dirname.parent / "test_products").iterdir()
 else:
     products_paths = (pathlib.Path(args.product),)
     assert products_paths[0].suffix in {".sp3", ".SP3"}
@@ -134,7 +134,7 @@ for product_path in products_paths:
         subplot.set_xticks(numpy.arange(len(windows)) + 0.5, windows)
         subplot.set_yticks(numpy.arange(len(degrees)) + 0.5, reversed(degrees))
         figure.savefig(
-            dirname / "renders" / f"{name}_window_to_error.png",
+            dirname.parent / "renders" / f"{name}_window_to_error.png",
             dpi=160,
         )
         matplotlib.pyplot.close(figure)

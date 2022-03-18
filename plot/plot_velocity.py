@@ -15,12 +15,12 @@ parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFo
 parser.add_argument(
     "--product",
     default=None,
-    help=f"path to the SP3 product file (defaults to all files in {dirname / 'test_products'})",
+    help=f"path to the SP3 product file (defaults to all files in {dirname.parent / 'test_products'})",
 )
 parser.add_argument(
     "--satellite",
     default=None,
-    help="satellite SP3 id (defualts to the first satellite in the file)",
+    help="satellite SP3 id (defaults to the first satellite in the file)",
 )
 parser.add_argument(
     "--window",
@@ -37,7 +37,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 if args.product is None:
-    products_paths = (dirname / "test_products").iterdir()
+    products_paths = (dirname.parent / "test_products").iterdir()
 else:
     products_paths = (pathlib.Path(args.product),)
     assert products_paths[0].suffix in {".sp3", ".SP3"}
@@ -144,7 +144,7 @@ for product_path in products_paths:
             handles=handles + velocity_handles, labels=labels + velocity_labels
         )
         figure.savefig(
-            dirname
+            dirname.parent
             / "renders"
             / f"{name}_velocity_window{args.window}_degree{args.degree}.png",
             dpi=160,

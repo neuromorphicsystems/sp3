@@ -311,9 +311,10 @@ def __call__(self, obstime: astropy.time.Time) -> astropy.coordinates.ITRS: ...
 
 -   `python3 -m sp3 coverage` displays supported satellites and the number of providers per satellite.
 -   `python3 test.py` runs parsing tests.
--   `python3 plot_interpolation.py` generates decimated polynomial interpolations graphs with errors (position only).
--   `python3 plot_velocities.py` generates position and velocity graphs. Velocity is interpolated when velocity samples are available and is calculated from the position otherwise.
--   `python3 plot_window_to_error` calculates the error on decimated samples for different polynomial window / polynomial degree combinations.
+-   `python3 plot/plot_interpolation.py` generates decimated polynomial interpolations graphs with errors (position only).
+-   `python3 plot/plot_velocities.py` generates position and velocity graphs. Velocity is interpolated when velocity samples are available and is calculated from the position otherwise.
+-   `python3 plot/plot_window_to_error.py` calculates the error on decimated samples for different polynomial window / polynomial degree combinations.
+-   `python3 plot/plot_analysis.py` generates plots of SP3 records, interpolated records and interpolated Alt/Az.
 
 The output of plot scripts is saved in _renders_.
 
