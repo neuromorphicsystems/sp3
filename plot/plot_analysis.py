@@ -4,6 +4,7 @@ import astropy.time
 import astropy.units
 import datetime
 import itertools
+import json
 import logging
 import matplotlib.pyplot
 import numpy
@@ -94,6 +95,10 @@ parser.add_argument(
     "--output",
     default=dirname / "analysis",
     help="output directory path",
+)
+parser.add_argument(
+    "--wcs-fields",
+    help="path to wcs_fields.json, a JSON representation of the WCS fields returned by https://github.com/neuromorphicsystems/astrometry",
 )
 args = parser.parse_args()
 
@@ -240,7 +245,7 @@ for index, ylabel in enumerate(("Az", "Alt")):
         2, 1, index + 1, sharex=None if len(subplots) == 0 else subplots[0]
     )
     subplot.set_ylabel(f"{ylabel} (deg)")
-    if index == 2:
+    if index == 1:
         subplot.set_xlabel("Time (s)")
     else:
         subplot.tick_params("x", labelbottom=False)
@@ -265,7 +270,7 @@ for index, ylabel in enumerate(("Az", "Alt")):
         2, 1, index + 1, sharex=None if len(subplots) == 0 else subplots[0]
     )
     subplot.set_ylabel(f"{ylabel} (deg)")
-    if index == 2:
+    if index == 1:
         subplot.set_xlabel("Time (s)")
     else:
         subplot.tick_params("x", labelbottom=False)
@@ -280,3 +285,192 @@ for index, quantity in enumerate((altaz.az, altaz.alt)):
 figure.legend()
 figure.savefig(output / f"{name}_interpolated_records_azalt_diff.png")
 matplotlib.pyplot.close()
+
+# ICRS
+icrs = altaz.transform_to(astropy.coordinates.ICRS())
+figure = matplotlib.pyplot.figure(figsize=(16, 9), dpi=80)
+figure.suptitle(f"{name} ICRS")
+subplots = []
+for index, ylabel in enumerate(("Ra", "Dec")):
+    subplot = figure.add_subplot(
+        2, 1, index + 1, sharex=None if len(subplots) == 0 else subplots[0]
+    )
+    subplot.set_ylabel(f"{ylabel} (deg)")
+    if index == 1:
+        subplot.set_xlabel("Time (s)")
+    else:
+        subplot.tick_params("x", labelbottom=False)
+    subplots.append(subplot)
+for index, quantity in enumerate((icrs.ra, icrs.dec)):
+    subplots[index].plot(
+        timestamps,
+        quantity.to("deg").value,
+        "+",
+        label=["Ra", "Dec"][index],
+    )
+figure.legend()
+figure.savefig(output / f"{name}_interpolated_records_icrs.png")
+matplotlib.pyplot.close()
+
+# ICRS diff
+figure = matplotlib.pyplot.figure(figsize=(16, 9), dpi=80)
+figure.suptitle(f"{name} ICRS diff")
+subplots = []
+for index, ylabel in enumerate(("Ra", "Dec")):
+    subplot = figure.add_subplot(
+        2, 1, index + 1, sharex=None if len(subplots) == 0 else subplots[0]
+    )
+    subplot.set_ylabel(f"{ylabel} (deg)")
+    if index == 1:
+        subplot.set_xlabel("Time (s)")
+    else:
+        subplot.tick_params("x", labelbottom=False)
+    subplots.append(subplot)
+for index, quantity in enumerate((icrs.ra, icrs.dec)):
+    subplots[index].plot(
+        timestamps[:-1],
+        numpy.diff(quantity.to("deg").value),
+        "+",
+        label=["Ra", "Dec"][index],
+    )
+figure.legend()
+figure.savefig(output / f"{name}_interpolated_records_icrs_diff.png")
+matplotlib.pyplot.close()
+
+if args.wcs_fields is not None:
+    import astropy.wcs
+
+    with open(args.wcs_fields) as wcs_fields_file:
+        wcs = astropy.wcs.WCS(
+            {key: tuple(value) for key, value in json.load(wcs_fields_file).items()}
+        )
+
+    # Pixels
+    pixels = wcs.all_world2pix(
+        numpy.array([icrs.ra.to("deg").value, icrs.dec.to("deg").value]).transpose(),
+        0,
+    )
+    pixels_nocorrection = wcs.wcs_world2pix(
+        numpy.array([icrs.ra.to("deg").value, icrs.dec.to("deg").value]).transpose(),
+        0,
+    )
+    figure = matplotlib.pyplot.figure(figsize=(16, 9), dpi=80)
+    figure.suptitle(f"{name} pixels")
+    subplots = []
+    for index, ylabel in enumerate(("x", "y")):
+        subplot = figure.add_subplot(
+            2, 1, index + 1, sharex=None if len(subplots) == 0 else subplots[0]
+        )
+        subplot.set_ylabel(f"{ylabel} (pixels)")
+        if index == 1:
+            subplot.set_xlabel("Time (s)")
+        else:
+            subplot.tick_params("x", labelbottom=False)
+        subplots.append(subplot)
+    for index, subplot in enumerate(subplots):
+        subplot.plot(
+            timestamps,
+            [pixel[index] for pixel in pixels],
+            "+",
+            label=["x", "y"][index],
+        )
+        subplot.plot(
+            timestamps,
+            [pixel[index] for pixel in pixels_nocorrection],
+            "+",
+            label=["x no correction", "y no correction"][index],
+        )
+    figure.legend()
+    figure.savefig(output / f"{name}_interpolated_records_pixels.png")
+    matplotlib.pyplot.close()
+
+    # Pixels correction
+    figure = matplotlib.pyplot.figure(figsize=(16, 9), dpi=80)
+    figure.suptitle(f"{name} pixels correction delta")
+    subplots = []
+    for index, ylabel in enumerate(("x", "y")):
+        subplot = figure.add_subplot(
+            2, 1, index + 1, sharex=None if len(subplots) == 0 else subplots[0]
+        )
+        subplot.set_ylabel(f"{ylabel} (pixels)")
+        if index == 1:
+            subplot.set_xlabel("Time (s)")
+        else:
+            subplot.tick_params("x", labelbottom=False)
+        subplots.append(subplot)
+    for index, subplot in enumerate(subplots):
+        subplot.plot(
+            timestamps,
+            [
+                pixel[index] - pixel_nocorrection[index]
+                for pixel, pixel_nocorrection in zip(pixels, pixels_nocorrection)
+            ],
+            "+",
+            label=["x", "y"][index],
+        )
+    figure.legend()
+    figure.savefig(output / f"{name}_interpolated_records_pixels_correction_delta.png")
+    matplotlib.pyplot.close()
+
+    # Pixels diff
+    figure = matplotlib.pyplot.figure(figsize=(16, 9), dpi=80)
+    figure.suptitle(f"{name} pixels diff")
+    subplots = []
+    for index, ylabel in enumerate(("vx", "vy")):
+        subplot = figure.add_subplot(
+            2, 1, index + 1, sharex=None if len(subplots) == 0 else subplots[0]
+        )
+        subplot.set_ylabel(f"{ylabel} (pixels/s)")
+        if index == 1:
+            subplot.set_xlabel("Time (s)")
+        else:
+            subplot.tick_params("x", labelbottom=False)
+        subplots.append(subplot)
+    for index, subplot in enumerate(subplots):
+        subplot.plot(
+            timestamps[:-1],
+            numpy.diff([pixel[index] for pixel in pixels]) * args.sampling_rate,
+            "+",
+            label=["vx", "vy"][index],
+        )
+        subplot.plot(
+            timestamps[:-1],
+            numpy.diff([pixel[index] for pixel in pixels_nocorrection])
+            * args.sampling_rate,
+            "+",
+            label=["vx no correction", "vy no correction"][index],
+        )
+    figure.legend()
+    figure.savefig(output / f"{name}_interpolated_records_pixels_diff.png")
+    matplotlib.pyplot.close()
+
+    # Pixels diff correction
+    figure = matplotlib.pyplot.figure(figsize=(16, 9), dpi=80)
+    figure.suptitle(f"{name} pixels diff correction delta")
+    subplots = []
+    for index, ylabel in enumerate(("vx", "vy")):
+        subplot = figure.add_subplot(
+            2, 1, index + 1, sharex=None if len(subplots) == 0 else subplots[0]
+        )
+        subplot.set_ylabel(f"{ylabel} (pixels/s)")
+        if index == 1:
+            subplot.set_xlabel("Time (s)")
+        else:
+            subplot.tick_params("x", labelbottom=False)
+        subplots.append(subplot)
+    for index, subplot in enumerate(subplots):
+        subplot.plot(
+            timestamps[:-1],
+            numpy.subtract(
+                numpy.diff([pixel[index] for pixel in pixels]),
+                numpy.diff([pixel[index] for pixel in pixels_nocorrection]),
+            )
+            * args.sampling_rate,
+            "+",
+            label=["vx", "vy"][index],
+        )
+    figure.legend()
+    figure.savefig(
+        output / f"{name}_interpolated_records_pixels_diff_correction_delta.png"
+    )
+    matplotlib.pyplot.close()
