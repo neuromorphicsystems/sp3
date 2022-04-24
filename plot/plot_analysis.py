@@ -429,13 +429,13 @@ if args.wcs_fields is not None:
     for index, subplot in enumerate(subplots):
         subplot.plot(
             timestamps[:-1],
-            numpy.diff([pixel[index] for pixel in pixels]) * args.sampling_rate,
+            numpy.diff([pixel[index] for pixel in pixels]) * args.sampling_rate,  # type: ignore
             "+",
             label=["vx", "vy"][index],
         )
         subplot.plot(
             timestamps[:-1],
-            numpy.diff([pixel[index] for pixel in pixels_nocorrection])
+            numpy.diff([pixel[index] for pixel in pixels_nocorrection])  # type: ignore
             * args.sampling_rate,
             "+",
             label=["vx no correction", "vy no correction"][index],
@@ -462,8 +462,8 @@ if args.wcs_fields is not None:
         subplot.plot(
             timestamps[:-1],
             numpy.subtract(
-                numpy.diff([pixel[index] for pixel in pixels]),
-                numpy.diff([pixel[index] for pixel in pixels_nocorrection]),
+                numpy.diff([pixel[index] for pixel in pixels]),  # type: ignore
+                numpy.diff([pixel[index] for pixel in pixels_nocorrection]),  # type: ignore
             )
             * args.sampling_rate,
             "+",
